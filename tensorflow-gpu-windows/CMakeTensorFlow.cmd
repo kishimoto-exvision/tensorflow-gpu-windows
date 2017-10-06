@@ -22,7 +22,12 @@ cmake .. -G "Visual Studio 14 2015 Win64" ^
 REM -DSWIG_EXECUTABLE="C:/SDKs/swigwin-3.0.12/swig.exe" ^
 REM -Dtensorflow_WIN_CPU_SIMD_OPTIONS is unavailable now.
 
-
-
+REM Fails
 msbuild /p:Configuration=Release /p:Platform=x64 /m:8 tensorflow.sln /p:PreferredToolArchitecture=x64
+
+cd /d %~dp0
+REM xcopy /E /I /Q /Y "tensorflow" "..\tensorflow\tensorflow"
+cd "..\tensorflow\tensorflow\contrib\cmake\build"
+msbuild /p:Configuration=Release /p:Platform=x64 /m:8 tensorflow.sln /p:PreferredToolArchitecture=x64
+
 ctest -C Release

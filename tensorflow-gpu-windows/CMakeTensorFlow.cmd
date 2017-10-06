@@ -16,7 +16,11 @@ cd build
 cmake .. -G "Visual Studio 14 2015 Win64" ^
 -Dtensorflow_ENABLE_GPU:BOOL=TRUE ^
 -DCUDNN_HOME:PATH="C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v8.0" ^
--Dtensorflow_BUILD_PYTHON_TESTS:BOOL=TRUE ^
+-Dtensorflow_BUILD_CC_EXAMPLE:BOOL=TRUE ^
+-Dtensorflow_BUILD_CC_TESTS:BOOL=FALSE ^
+-Dtensorflow_BUILD_PYTHON_BINDINGS:BOOL=FALSE ^
+-Dtensorflow_BUILD_PYTHON_TESTS:BOOL=FALSE ^
+-Dtensorflow_BUILD_SHARED_LIB:BOOL=FALSE ^
 -DCMAKE_CONFIGURATION_TYPES:STRING="Release"
 
 REM -DSWIG_EXECUTABLE="C:/SDKs/swigwin-3.0.12/swig.exe" ^
@@ -26,7 +30,7 @@ REM Fails
 msbuild /p:Configuration=Release /p:Platform=x64 /m:8 tensorflow.sln /p:PreferredToolArchitecture=x64
 
 cd /d %~dp0
-REM xcopy /E /I /Q /Y "tensorflow" "..\tensorflow\tensorflow"
+xcopy /E /I /Q /Y "tensorflow" "..\tensorflow\tensorflow"
 cd "..\tensorflow\tensorflow\contrib\cmake\build"
 msbuild /p:Configuration=Release /p:Platform=x64 /m:8 tensorflow.sln /p:PreferredToolArchitecture=x64
 
